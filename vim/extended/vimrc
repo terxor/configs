@@ -1,0 +1,128 @@
+call plug#begin("$HOME/vimfiles/plugged")
+  Plug 'NLKNguyen/papercolor-theme'
+  Plug 'preservim/nerdtree'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  Plug 'junegunn/vim-easy-align'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-surround'
+call plug#end()
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='ayu_dark'
+
+function LoadTmp()
+   cd $BUFFER
+   silent edit tmp
+endfunction
+
+" autocmd VimEnter * call LoadTmp()
+
+syntax on
+
+" Basic mappings
+let mapleader = " "
+inoremap kj <esc>
+vnoremap kj <esc>
+map ; $
+
+" Markdown Preview
+nmap <C-p> <Plug>(MarkdownPreview)
+
+nmap ga <Plug>(EasyAlign)
+
+nnoremap <leader>e :e $BUFFER/tmp<CR>
+nnoremap <leader>d :bd<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>p "+p
+nnoremap <leader>y "+y
+nnoremap <C-o> :ls<CR>:b 
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-[> :bp<CR>
+nnoremap <C-]> :bn<CR>
+
+" Makes switching windows easier
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+" Use Q for formatting instead of ex-mode
+map Q gq
+
+map <leader>D :put =strftime('%Y-%m-%d %H:%M:%S')<CR>
+
+set encoding=utf-8
+
+set background=light
+colorscheme PaperColor
+" --------------------------------
+let NERDTreeIgnore=['\c^ntuser\..*']
+" --------------------------------
+
+set list
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+
+" Search
+set incsearch
+set ignorecase
+set smartcase
+
+" Status bar: mode, partial command
+set showmode
+set showcmd
+  
+" Timeout for mapped key sequences
+set timeout
+set timeoutlen=200
+
+" Number of lines to scroll with U & D
+" Scroll offset, Relative numbers
+set scroll=10
+set scrolloff=3
+set relativenumber
+
+" --------------------------------
+
+" Show position in status bar
+set ruler
+
+" Copy indent from current line while moving to next line
+set autoindent
+
+" Do not wrap lines
+set nowrap
+
+" Auto reload file if changed outside
+set autoread 
+
+" Normal backspace in insert mode
+set backspace=2 
+
+" No sounds
+set belloff=all 
+
+" Show tabs line
+set showtabline=2 
+
+" Tab settings
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" Colors setting for terminal
+set termguicolors 
+
+" Wildmenu
+set wildmenu
+set wildmode=longest:full,full
+
+set lazyredraw
+" --------------------------------
+
+
+" Load CP environment
+command CP source $CP_COMMON_UTIL_DIR/vim/cp.vim
+
+" Text Formatting environment
+command TF set textwidth=64 linebreak
