@@ -12,3 +12,5 @@ Simply copy-paste to `_vimrc` or `_vimrc` or `vimfiles/vimrc`
 - Follow `vim-plug` install instructions
 - Type `:PlugInstall`
 - Restart
+
+***
