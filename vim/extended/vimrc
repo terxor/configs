@@ -1,25 +1,5 @@
-call plug#begin("$HOME/vimfiles/plugged")
-  Plug 'NLKNguyen/papercolor-theme'
-  Plug 'preservim/nerdtree'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-  Plug 'junegunn/vim-easy-align'
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-surround'
-call plug#end()
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='ayu_dark'
-
-function LoadTmp()
-   cd $BUFFER
-   silent edit tmp
-endfunction
-
-" autocmd VimEnter * call LoadTmp()
-
 syntax on
+set encoding=utf-8
 
 " Basic mappings
 let mapleader = " "
@@ -27,18 +7,12 @@ inoremap kj <esc>
 vnoremap kj <esc>
 map ; $
 
-" Markdown Preview
-nmap <C-p> <Plug>(MarkdownPreview)
-
-nmap ga <Plug>(EasyAlign)
-
-nnoremap <leader>e :e $BUFFER/tmp<CR>
-nnoremap <leader>d :bd<CR>
+nnoremap <leader>d :bd!<CR>
 nnoremap <leader>w :w<CR>
-nnoremap <leader>p "+p
-nnoremap <leader>y "+y
-nnoremap <C-o> :ls<CR>:b 
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <leader>p ggdG"+p
+nnoremap <leader>y gg"+yG
+nnoremap <leader>o :only<CR> " Hide other windows for same buffer
+nnoremap <C-o> :ls<CR>:b
 nnoremap <C-[> :bp<CR>
 nnoremap <C-]> :bn<CR>
 
@@ -47,21 +21,22 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
 " Use Q for formatting instead of ex-mode
 map Q gq
 
 map <leader>D :put =strftime('%Y-%m-%d %H:%M:%S')<CR>
 
-set encoding=utf-8
+" No swap files
+set noswapfile
 
 set background=light
-colorscheme PaperColor
-" --------------------------------
-let NERDTreeIgnore=['\c^ntuser\..*']
-" --------------------------------
 
 set list
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+
+" Allow unsaved buffers
+set hidden
 
 " Search
 set incsearch
@@ -71,7 +46,7 @@ set smartcase
 " Status bar: mode, partial command
 set showmode
 set showcmd
-  
+
 " Timeout for mapped key sequences
 set timeout
 set timeoutlen=200
@@ -81,8 +56,6 @@ set timeoutlen=200
 set scroll=10
 set scrolloff=3
 set relativenumber
-
-" --------------------------------
 
 " Show position in status bar
 set ruler
@@ -118,11 +91,9 @@ set wildmenu
 set wildmode=longest:full,full
 
 set lazyredraw
-" --------------------------------
 
+" Plugins
+source ~/vimfiles/plugins.vim
 
-" Load CP environment
-command CP source $CP_COMMON_UTIL_DIR/vim/cp.vim
-
-" Text Formatting environment
-command TF set textwidth=64 linebreak
+" For CP
+source $CP_UTILS/vim/cp.vim

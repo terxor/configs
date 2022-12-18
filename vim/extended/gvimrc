@@ -1,4 +1,4 @@
-set guifont=Anonymous\ Pro:h12
+set guifont=Inconsolata:h12
 
 set guioptions+=c
 set guioptions-=m
@@ -23,3 +23,4 @@ set guicursor+=a:blinkon0
 
 highlight Cursor guifg=black guibg=#b5b5b5
 highlight iCursor guifg=black guibg=#80ff30
+
