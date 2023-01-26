@@ -27,6 +27,9 @@ map Q gq
 
 map <leader>D :put =strftime('%Y-%m-%d %H:%M:%S')<CR>
 
+" Automatic fold everything inside {{{ and }}}
+set foldmethod=marker
+
 " No swap files
 set noswapfile
 
